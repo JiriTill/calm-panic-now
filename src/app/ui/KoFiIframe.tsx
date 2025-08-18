@@ -8,9 +8,8 @@ export default function KoFiIframe() {
       src={src}
       title="calmpanicnow"
       loading="lazy"
-      style={{ border: "none", width: "100%", padding: "4px", background: "#f9f9f9" }}
+      style={{ border: "0", width: "100%", background: "transparent" }}
       height={712}
-      className="rounded-xl border border-slate-200 dark:border-slate-800"
     />
   );
 }
