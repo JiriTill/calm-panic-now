@@ -61,6 +61,10 @@ export default function BreathRing({
   onFinish?: () => void;
 }) {
   const phases = useMemo(() => getPattern(pattern), [pattern]);
+  const cycleTotal = useMemo(
+    () => phases.reduce((a, b) => a + b.seconds, 0),
+    [phases]
+  );
 
   const idxRef = useRef(0);
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -75,10 +79,9 @@ export default function BreathRing({
     setTotalLeft(durationSec);
   }, [startKey, phases, durationSec]);
 
-  // Tick 1x/sec only when started
+  // Tick every second when started (we'll animate the timeline pointer smoothly via CSS transition)
   useEffect(() => {
-    if (!started) return;
-    if (totalLeft <= 0) return;
+    if (!started || totalLeft <= 0) return;
 
     const id = setInterval(() => {
       setPhaseLeft((prev) => {
@@ -105,12 +108,25 @@ export default function BreathRing({
   }, [started, phases, totalLeft, onFinish]);
 
   const current = phases[phaseIndex];
-  const progressPct = Math.max(0, Math.min(100, ((durationSec - totalLeft) / durationSec) * 100));
+
+  // Timeline pointer position (percent of cycle)
+  const elapsedBeforePhase = useMemo(
+    () => phases.slice(0, phaseIndex).reduce((a, b) => a + b.seconds, 0),
+    [phases, phaseIndex]
+  );
+  const withinPhaseElapsed = phases[phaseIndex].seconds - phaseLeft; // 0..seconds-1
+  const pointerPct =
+    ((elapsedBeforePhase + Math.max(0, withinPhaseElapsed)) / cycleTotal) * 100;
+
+  const progressPct = Math.max(
+    0,
+    Math.min(100, ((durationSec - totalLeft) / durationSec) * 100)
+  );
 
   return (
-    <div className="grid place-items-center gap-6">
+    <div className="grid place-items-center gap-5">
       {/* Phase label + seconds */}
-      <div className="text-2xl font-semibold" aria-live="polite">
+      <div className="text-xl font-semibold" aria-live="polite">
         {started ? current.label : "Ready"}
       </div>
       <div className="text-sm text-slate-500" aria-live="polite">
@@ -135,19 +151,52 @@ export default function BreathRing({
         )}
       </div>
 
-      {/* Progress bar + time left */}
+      {/* NEW: Phase timeline with moving pointer */}
+      <div className="w-full max-w-xl">
+        {/* Labels aligned to segment widths */}
+        <div className="flex text-[11px] text-slate-500 mb-1">
+          {phases.map((ph, i) => (
+            <div key={i} style={{ flex: ph.seconds }} className="text-center">
+              {ph.label}
+            </div>
+          ))}
+        </div>
+        <div className="relative h-3 rounded bg-slate-200 dark:bg-slate-800 overflow-hidden flex">
+          {phases.map((ph, i) => (
+            <div
+              key={i}
+              style={{ flex: ph.seconds }}
+              className={
+                ph.label === "Exhale"
+                  ? "bg-sky-400/60"
+                  : "bg-sky-300/50"
+              }
+            />
+          ))}
+          {/* pointer */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-slate-700 dark:bg-slate-200"
+            style={{
+              left: `${pointerPct}%`,
+              transition: "left 1s linear",
+              transform: "translate(-50%, -50%)",
+            }}
+            aria-hidden
+          />
+        </div>
+      </div>
+
+      {/* Session progress bar + time left */}
       <div className="w-full max-w-sm">
         <div className="flex justify-between text-xs text-slate-500 mb-1">
           <span>{mmss(durationSec - totalLeft)}</span>
           <span>{mmss(totalLeft)}</span>
         </div>
         <div className="h-2 rounded bg-slate-200 dark:bg-slate-800 overflow-hidden">
-          <div
-            className="h-full bg-sky-500"
-            style={{ width: `${progressPct}%` }}
-          />
+          <div className="h-full bg-sky-500" style={{ width: `${progressPct}%` }} />
         </div>
       </div>
     </div>
   );
 }
+
