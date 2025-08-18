@@ -23,17 +23,17 @@ export default function HomeToolTabs() {
 
   return (
     <section className="py-6">
-      {/* Tabs */}
-      <div className="flex gap-2 justify-center mb-6">
+      {/* Big CTA tabs */}
+      <div className="flex gap-3 justify-center mb-6 flex-wrap">
         <button
-          className="chip"
+          className="cta-tab cta-tab--breathing"
           aria-pressed={tab === "breathing"}
           onClick={() => setTab("breathing")}
         >
           Box Breathing
         </button>
         <button
-          className="chip"
+          className="cta-tab cta-tab--grounding"
           aria-pressed={tab === "grounding"}
           onClick={() => setTab("grounding")}
         >
