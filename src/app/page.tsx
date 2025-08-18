@@ -48,6 +48,15 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
+            <p className="muted mb-4">
+              Calm Panic Now is free and open to everyone. If it helps you, please
+              consider supporting us with a small donation on Ko-fi.
+            </p>
+            <KoFiIframe />
+          </div>
 
       {/* SEO section */}
       <section className="pb-20 prose prose-slate dark:prose-invert max-w-none">
@@ -77,14 +86,6 @@ export default function Home() {
           This site is educational and not medical advice—if symptoms persist or worsen, consider speaking with a licensed clinician.
         </p>
       </section>
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
-            <p className="muted mb-4">
-              Calm Panic Now is free and open to everyone. If it helps you, please
-              consider supporting us with a small donation on Ko-fi.
-            </p>
-            <KoFiIframe />
-          </div>
     </div>
   );
 }
