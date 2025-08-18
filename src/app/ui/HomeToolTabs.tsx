@@ -24,18 +24,22 @@ export default function HomeToolTabs() {
   return (
     <section className="pb-8">
       <div className="home-card">
-        {/* Tabs row sits on card top */}
+        {/* FULL-WIDTH CONNECTED TABS */}
         <div className="px-3 pt-3">
-          <div className="inline-flex gap-2 relative z-10">
+          <div className="grid grid-cols-2 gap-0 relative z-10">
             <button
-              className={`tool-tab ${tab === "breathing" ? "tool-tab--active" : "tool-tab--inactive"}`}
+              className={`tool-tab w-full h-12 text-center ${
+                tab === "breathing" ? "tool-tab--active" : "tool-tab--inactive"
+              }`}
               aria-pressed={tab === "breathing"}
               onClick={() => setTab("breathing")}
             >
               Box Breathing
             </button>
             <button
-              className={`tool-tab ${tab === "grounding" ? "tool-tab--active" : "tool-tab--inactive"}`}
+              className={`tool-tab w-full h-12 text-center ${
+                tab === "grounding" ? "tool-tab--active" : "tool-tab--inactive"
+              }`}
               aria-pressed={tab === "grounding"}
               onClick={() => setTab("grounding")}
             >
@@ -44,15 +48,16 @@ export default function HomeToolTabs() {
           </div>
         </div>
 
-        {/* Card body connects to active tab */}
+        {/* CARD BODY (connects to active tab) */}
         <div className="home-card-body">
           {tab === "breathing" ? (
             <div className="grid gap-5 justify-items-center">
               <p className="text-sm muted text-center max-w-prose">
-                Follow the ring: <em>Inhale → Hold → Exhale → Hold</em>. Pick a pattern and duration, then press <strong>Start</strong>.
+                Follow the ring: <em>Inhale → Hold → Exhale → Hold</em>.
+                Pick a pattern and duration, then press <strong>Start</strong>.
               </p>
 
-              {/* Controls (compact) */}
+              {/* Controls */}
               <div className="flex flex-wrap gap-3 items-center justify-center">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium">Pattern</span>
@@ -95,7 +100,10 @@ export default function HomeToolTabs() {
                   />
                   Reduced motion
                 </label>
+              </div>
 
+              {/* Start below controls */}
+              <div className="text-center">
                 {!started ? (
                   <button
                     className="px-5 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 smooth"
@@ -116,7 +124,7 @@ export default function HomeToolTabs() {
                 )}
               </div>
 
-              {/* Ring */}
+              {/* Ring + timeline */}
               <BreathRing
                 durationSec={duration}
                 pattern={pattern}
@@ -129,7 +137,8 @@ export default function HomeToolTabs() {
           ) : (
             <div className="grid gap-5">
               <p className="text-sm muted text-center max-w-prose mx-auto">
-                Move through your senses to anchor attention in the present. You can type a word or just check the boxes.
+                Move through your senses to anchor attention in the present.
+                You can type a word or just check the boxes.
               </p>
               <GroundingWidget />
             </div>
