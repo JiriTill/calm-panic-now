@@ -1,20 +1,19 @@
-import Link from 'next/link'
-export const metadata = { title: 'Library — Calm Panic Now' }
-export default function Library(){
-  const items = [
-    {slug:'stop-panic-attack', title:'How to stop a panic attack (3 steps that work)'},
-    {slug:'box-breathing', title:'Box breathing: calm your nervous system in 2 minutes'},
-    {slug:'grounding-54321', title:'5‑4‑3‑2‑1 grounding: a quick reset for anxiety'},
-    {slug:'sleep-anxiety', title:'Anxiety at night: how to switch off and sleep'},
-  ]
-  return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Library</h1>
-      <ul className="space-y-3">
-        {items.map(i=> (
-          <li key={i.slug}><Link className="underline" href={`/library/${i.slug}`}>{i.title}</Link></li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+export const metadata = { title: 'Anxiety at night — Calm Panic Now' }
+
+# Anxiety at night: how to switch off and sleep
+
+**What to expect:** A simple wind-down routine plus a quick breathing exercise to lower arousal before bed.
+
+## 20-minute wind-down
+1. Dim lights, put your phone face-down or on Do Not Disturb.
+2. Do **[Box Breathing](/calm/box-breathing)** for 2 minutes.
+3. Write one line: *“One small thing I can do tomorrow is …”*
+
+## If you wake up anxious
+- Sit up, feet to the floor, slow breath out.  
+- Do **[5-4-3-2-1](/calm/grounding-54321)** silently.  
+- If thoughts race, repeat the exhale a bit longer than the inhale.
+
+---
+
+**Related:** [Box breathing](/library/box-breathing) · [Grounding 5-4-3-2-1](/library/grounding-54321)
