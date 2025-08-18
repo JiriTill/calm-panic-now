@@ -1,6 +1,24 @@
 import Link from "next/link";
 import CrisisBanner from "./ui/CrisisBanner";
 import HomeToolTabs from "./ui/HomeToolTabs";
+import KoFiIframe from "./ui/KoFiIframe";
+
+export default function HomePage() {
+  return (
+    <div className="container">
+      {/* ...your hero and tool card... */}
+
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
+        <p className="muted mb-4">
+          Calm Panic Now is free and open to everyone. If it helps you, please
+          consider supporting us with a small donation on Ko-fi.
+        </p>
+        <KoFiIframe />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
