@@ -10,17 +10,12 @@ export default function Home() {
       {/* Hero */}
       <section className="py-10 md:py-16 text-center">
         <h1>Calm yourself right now</h1>
-        <p className="mt-4 text-slate-600 dark:text-slate-300">
-          Two quick tools, zero sign-up. Evidence-informed. Works offline.
-        </p>
       </section>
 
-      <section className="text-center max-w-2xl mx-auto">
+      <section className="text-center max-w-2xl mx-auto section pt-0">
         <h2>Quick calm: start here</h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
-          For fast relief, use one of the tools below. <strong>Box Breathing</strong> guides a steady rhythm
-          to lower arousal; <strong>Grounding 5-4-3-2-1</strong> anchors attention in your senses.
-          Choose a tool and begin right on this page.
+        <p className="mt-2 muted">
+          Two proven options. Tap a tool to begin below — no sign-up, works offline.
         </p>
       </section>
       {/* Inline tools (tabs) */}
