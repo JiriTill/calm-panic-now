@@ -37,6 +37,10 @@ export default function Grounding54321Page() {
   return (
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">5-4-3-2-1 Grounding Exercise</h1>
+      <p className="text-slate-600 dark:text-slate-300">
+        You’ll move through your senses to anchor attention in the present: 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste (optional). Type a word or just check the boxes — both work.
+      </p>
+
       <p className="mb-6">{step.label}</p>
 
       <div className="space-y-2 mb-6">
