@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{color-scheme: light dark}
+html,body{height:100%}
+body{ @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100; }
+
+/* focus ring */
+*:focus-visible{ @apply outline-none ring-2 ring-sky-400 ring-offset-2 ring-offset-transparent; }
+
+/* smooth transitions but respect reduced motion */
+@media (prefers-reduced-motion: no-preference){
+  .smooth{ transition: all .25s ease; }
+}
+```
+
+```ts
+// FILE: tailwind.config.ts
+import type { Config } from 'tailwindcss'
+const config: Config = {
+  content: ['./src/**/*.{ts,tsx,md,mdx}'],
+  theme: { extend: {} },
+  darkMode: 'class',
+}
+export default config
