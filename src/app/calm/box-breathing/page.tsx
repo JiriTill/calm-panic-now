@@ -1,55 +1,92 @@
-'use client'
-import { useEffect, useState } from 'react'
-import BreathRing, { PatternKey } from '../../ui/BreathRing'
-import FeedbackWidget, { type Feedback } from '../../ui/FeedbackWidget'
+"use client";
 
-export default function BoxBreathingPage(){
-  const [pattern,setPattern] = useState<PatternKey>('4-4-4-4')
-  const [duration,setDuration] = useState(120)
-  const [reduced,setReduced] = useState(false)
-  const [saved,setSaved] = useState<Feedback|null>(null)
+import { useEffect, useState } from "react";
+import BreathRing, { type PatternKey } from "../../ui/BreathRing";
+import FeedbackWidget, { type Feedback } from "../../ui/FeedbackWidget";
 
-  useEffect(()=>{
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(media.matches)
-    const onChange = () => setReduced(media.matches)
-    media.addEventListener('change', onChange)
-    return ()=> media.removeEventListener('change', onChange)
-  },[])
+export default function BoxBreathingPage() {
+  const [pattern, setPattern] = useState<PatternKey>("4-4-4-4");
+  const [duration, setDuration] = useState<number>(180); // 3 min default (change to 120 if you prefer 2 min)
+  const [reduced, setReduced] = useState(false);
+  const [saved, setSaved] = useState<Feedback | null>(null);
+
+  // Respect user's OS "reduced motion" setting by default
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 space-y-8">
+    <div className="container py-10 space-y-8">
       <h1 className="text-3xl font-bold">Box Breathing</h1>
-      <p className="text-slate-600 dark:text-slate-300">Follow the ring and the prompts. Adjust pattern and duration to your comfort.</p>
 
+      {/* Controls row (chip-style) */}
       <div className="flex flex-wrap gap-4 items-center">
-        <label className="text-sm">Pattern
-          <select className="ml-2 px-3 py-2 rounded-lg border bg-transparent" value={pattern} onChange={e=>setPattern(e.target.value as PatternKey)}>
-            <option value="4-4-4-4">4-4-4-4 (default)</option>
-            <option value="3-3-3-3">3-3-3-3</option>
-            <option value="5-5-5-5">5-5-5-5</option>
-            <option value="4-7-8">4-7-8</option>
-          </select>
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">Pattern</span>
+          {(["4-4-4-4", "3-3-3-3", "5-5-5-5", "4-7-8"] as const).map((p) => (
+            <button
+              key={p}
+              type="button"
+              aria-pressed={pattern === p}
+              className="chip"
+              onClick={() => setPattern(p)}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">Duration</span>
+          {[120, 180, 240].map((d) => (
+            <button
+              key={d}
+              type="button"
+              aria-pressed={duration === d}
+              className="chip"
+              onClick={() => setDuration(d)}
+            >
+              {d / 60} min
+            </button>
+          ))}
+        </div>
+
+        <label className="text-sm flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={reduced}
+            onChange={(e) => setReduced(e.target.checked)}
+          />
+          Reduced motion
         </label>
-        <label className="text-sm">Duration
-          <select className="ml-2 px-3 py-2 rounded-lg border bg-transparent" value={duration} onChange={e=>setDuration(parseInt(e.target.value))}>
-            <option value={120}>2 min</option>
-            <option value={180}>3 min</option>
-            <option value={240}>4 min</option>
-          </select>
-        </label>
-        <label className="text-sm flex items-center gap-2"><input type="checkbox" checked={reduced} onChange={e=>setReduced(e.target.checked)}/> Reduced motion</label>
       </div>
 
+      {/* Breathing ring + countdown */}
       <BreathRing durationSec={duration} pattern={pattern} reducedMotion={reduced} />
 
+      {/* Quick feedback (saved to localStorage only) */}
       <section className="grid gap-4">
         <h2 className="text-xl font-semibold">How did it go?</h2>
-        <FeedbackWidget onDone={(fb)=>{ setSaved(fb); try{ const arr=JSON.parse(localStorage.getItem('sessions')||'[]'); arr.push({tool:'box-breathing',ts:Date.now(),...fb}); localStorage.setItem('sessions',JSON.stringify(arr))}catch{} }} />
+        <FeedbackWidget
+          onDone={(fb) => {
+            setSaved(fb);
+            try {
+              const arr = JSON.parse(localStorage.getItem("sessions") || "[]");
+              arr.push({ tool: "box-breathing", ts: Date.now(), ...fb });
+              localStorage.setItem("sessions", JSON.stringify(arr));
+            } catch {}
+          }}
+        />
         {saved && (
-          <p className="text-sm text-slate-600 dark:text-slate-300">Saved locally. You can clear your browser storage anytime.</p>
+          <p className="text-sm text-slate-600 dark:text-slate-300">
+            Saved locally. You can clear your browser storage anytime.
+          </p>
         )}
       </section>
     </div>
-  )
+  );
 }
