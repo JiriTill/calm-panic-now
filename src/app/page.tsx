@@ -15,6 +15,14 @@ export default function Home() {
         </p>
       </section>
 
+      <section className="text-center max-w-2xl mx-auto">
+        <h2>Quick calm: start here</h2>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
+          For fast relief, use one of the tools below. <strong>Box Breathing</strong> guides a steady rhythm
+          to lower arousal; <strong>Grounding 5-4-3-2-1</strong> anchors attention in your senses.
+          Choose a tool and begin right on this page.
+        </p>
+      </section>
       {/* Inline tools (tabs) */}
       <HomeToolTabs />
 
