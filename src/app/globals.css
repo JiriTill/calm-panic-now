@@ -9,12 +9,9 @@
 html, body { height: 100%; }
 
 body {
-  @apply text-slate-900 dark:text-slate-100;
-  background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(125, 211, 252, .18), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(16, 185, 129, .16), transparent 60%),
-    var(--bg-fallback, #f8fafc);
+  @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100;
 }
+
 @media (prefers-color-scheme: dark) {
   body {
     --bg-fallback: #0b1220;
@@ -50,4 +47,15 @@ body {
 }
 .chip[aria-pressed="true"], .chip[aria-selected="true"] {
   @apply bg-sky-600 text-white border-sky-600;
+}
+
+@layer components {
+  .cta-tab {
+    @apply inline-flex items-center justify-center px-5 py-3 rounded-2xl text-base font-semibold shadow-sm smooth;
+  }
+  .cta-tab--breathing[aria-pressed="true"] { @apply bg-sky-600 text-white; }
+  .cta-tab--breathing[aria-pressed="false"] { @apply bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200; }
+
+  .cta-tab--grounding[aria-pressed="true"] { @apply bg-emerald-600 text-white; }
+  .cta-tab--grounding[aria-pressed="false"] { @apply bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200; }
 }
