@@ -2,7 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global custom styles below */
+/* Light + dark background that feels calm */
+:root {
+  color-scheme: light dark;
+}
+html, body { height: 100%; }
+
 body {
-  @apply bg-white text-gray-900;
+  @apply text-slate-900 dark:text-slate-100;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(125, 211, 252, .18), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(16, 185, 129, .16), transparent 60%),
+    var(--bg-fallback, #f8fafc);
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    --bg-fallback: #0b1220;
+  }
+}
+
+/* Focus ring */
+*:focus-visible {
+  @apply outline-none ring-2 ring-sky-400 ring-offset-2 ring-offset-transparent;
+}
+
+/* Smooth transitions (respect reduced motion) */
+@media (prefers-reduced-motion: no-preference){
+  .smooth { transition: all .25s ease; }
+}
+
+/* Utilities */
+.container {
+  @apply mx-auto max-w-3xl px-4;
+}
+
+/* Clickable “chip” controls */
+.chip {
+  @apply px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-sm;
+}
+.chip[aria-pressed="true"], .chip[aria-selected="true"] {
+  @apply bg-sky-600 text-white border-sky-600;
 }
