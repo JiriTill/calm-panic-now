@@ -6,9 +6,11 @@ import GroundingWidget from "./GroundingWidget";
 export default function HomeToolTabs() {
   const [tab, setTab] = useState<"breathing" | "grounding">("breathing");
 
-  // Breathing state
-  const [pattern, setPattern] = useState<PatternKey>("4-4-4-4");
-  const [duration, setDuration] = useState<number>(120);
+  // Fixed defaults for the home page
+  const FIXED_PATTERN: PatternKey = "4-4-4-4";
+  const FIXED_DURATION = 120;
+
+  // State for breathing
   const [reduced, setReduced] = useState(false);
   const [started, setStarted] = useState(false);
   const [startKey, setStartKey] = useState(0);
@@ -24,7 +26,7 @@ export default function HomeToolTabs() {
   return (
     <section className="pb-8">
       <div className="home-card">
-        {/* FULL-WIDTH CONNECTED TABS */}
+        {/* Full-width connected tabs */}
         <div className="px-3 pt-3">
           <div className="grid grid-cols-2 gap-0 relative z-10">
             <button
@@ -48,49 +50,17 @@ export default function HomeToolTabs() {
           </div>
         </div>
 
-        {/* CARD BODY (connects to active tab) */}
+        {/* Card body */}
         <div className="home-card-body">
           {tab === "breathing" ? (
             <div className="grid gap-5 justify-items-center">
               <p className="text-sm muted text-center max-w-prose">
-                Follow the ring: <em>Inhale → Hold → Exhale → Hold</em>.
-                Pick a pattern and duration, then press <strong>Start</strong>.
+                Follow the ring: <em>Inhale → Hold → Exhale → Hold</em>. This quick version runs a{" "}
+                <strong>4-4-4-4 pattern for 2 minutes</strong>. Press <strong>Start</strong> to begin.
               </p>
 
-              {/* Controls */}
-              <div className="flex flex-wrap gap-3 items-center justify-center">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">Pattern</span>
-                  {(["4-4-4-4", "3-3-3-3", "5-5-5-5", "4-7-8"] as const).map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      aria-pressed={pattern === p}
-                      className="chip"
-                      onClick={() => setPattern(p)}
-                      disabled={started}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">Duration</span>
-                  {[120, 180, 240].map((d) => (
-                    <button
-                      key={d}
-                      type="button"
-                      aria-pressed={duration === d}
-                      className="chip"
-                      onClick={() => setDuration(d)}
-                      disabled={started}
-                    >
-                      {d / 60} min
-                    </button>
-                  ))}
-                </div>
-
+              {/* Reduced motion + Start below it */}
+              <div className="flex items-center gap-3">
                 <label className="text-sm flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -100,17 +70,11 @@ export default function HomeToolTabs() {
                   />
                   Reduced motion
                 </label>
-              </div>
 
-              {/* Start below controls */}
-              <div className="text-center">
                 {!started ? (
                   <button
                     className="px-5 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 smooth"
-                    onClick={() => {
-                      setStartKey((k) => k + 1);
-                      setStarted(true);
-                    }}
+                    onClick={() => { setStartKey((k) => k + 1); setStarted(true); }}
                   >
                     Start
                   </button>
@@ -126,21 +90,29 @@ export default function HomeToolTabs() {
 
               {/* Ring + timeline */}
               <BreathRing
-                durationSec={duration}
-                pattern={pattern}
+                durationSec={FIXED_DURATION}
+                pattern={FIXED_PATTERN}
                 reducedMotion={reduced}
                 started={started}
                 startKey={startKey}
                 onFinish={() => setStarted(false)}
               />
+
+              <p className="text-xs text-slate-500">
+                Need options (4-7-8, 3–5 mins)?{" "}
+                <a className="underline" href="/calm/box-breathing">Open the full tool →</a>
+              </p>
             </div>
           ) : (
             <div className="grid gap-5">
               <p className="text-sm muted text-center max-w-prose mx-auto">
-                Move through your senses to anchor attention in the present.
-                You can type a word or just check the boxes.
+                Move through your senses to anchor attention in the present. You can type a word or just check the boxes.
               </p>
               <GroundingWidget />
+              <p className="text-xs text-slate-500 text-center">
+                Prefer the full version?{" "}
+                <a className="underline" href="/calm/grounding-54321">Open Grounding →</a>
+              </p>
             </div>
           )}
         </div>
