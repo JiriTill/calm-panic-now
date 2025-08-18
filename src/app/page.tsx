@@ -8,16 +8,13 @@ export default function Home() {
       <CrisisBanner />
 
       {/* Hero */}
-      <section className="py-10 md:py-16 text-center">
+      <section className="home-hero">
         <h1>Calm yourself right now</h1>
-      </section>
-
-      <section className="text-center max-w-2xl mx-auto section pt-0">
-        <h2>Quick calm: start here</h2>
-        <p className="mt-2 muted">
+        <p className="muted mt-2">
           Two proven options. Tap a tool to begin below — no sign-up, works offline.
         </p>
       </section>
+      
       {/* Inline tools (tabs) */}
       <HomeToolTabs />
 
