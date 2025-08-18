@@ -2,6 +2,7 @@ import Link from "next/link";
 import CrisisBanner from "./ui/CrisisBanner";
 import HomeToolTabs from "./ui/HomeToolTabs";
 import KoFiIframe from "./ui/KoFiIframe";
+import KoFiSmallButton from "./ui/KoFiSmallButton";
 
 export default function Home() {
   return (
@@ -18,6 +19,10 @@ export default function Home() {
       
       {/* Inline tools (tabs) */}
       <HomeToolTabs />
+
+      <div className="mt-4 flex justify-center">
+        <KoFiSmallButton />
+      </div>
 
       {/* Quick reads (same look as Library) */}
       <section className="pb-12">
