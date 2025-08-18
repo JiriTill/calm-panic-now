@@ -1,4 +1,18 @@
 import Link from "next/link";
+import KoFiFloating from "../ui/KoFiFloating";
+
+export default function LibraryLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="container py-8">
+      <article className="prose prose-slate dark:prose-invert max-w-none">
+        {children}
+      </article>
+
+      {/* Floating Ko-fi bubble appears only on library pages */}
+      <KoFiFloating />
+    </div>
+  );
+}
 
 export default function LibraryLayout({ children }: { children: React.ReactNode }) {
   return (
