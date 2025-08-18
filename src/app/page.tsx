@@ -1,8 +1,19 @@
 import Link from "next/link";
 import CrisisBanner from "./ui/CrisisBanner";
-import HomeToolTabs from "./ui/HomeToolTabs";
 import KoFiIframe from "./ui/KoFiIframe";
 import KoFiSmallButton from "./ui/KoFiSmallButton";
+import dynamic from "next/dynamic";
+
+// Load the interactive tool card on the client only.
+// If anything inside throws, the rest of the page will still render.
+const HomeToolTabs = dynamic(() => import("./ui/HomeToolTabs"), {
+  ssr: false,
+  loading: () => (
+    <div className="home-card p-6 text-center">
+      <p className="muted">Loading tools…</p>
+    </div>
+  ),
+});
 
 export default function Home() {
   return (
@@ -16,10 +27,11 @@ export default function Home() {
           Two proven options. Tap a tool to begin below — no sign-up, works offline.
         </p>
       </section>
-      
+
       {/* Inline tools (tabs) */}
       <HomeToolTabs />
 
+      {/* Small Ko-fi button just under the tool card */}
       <div className="mt-4 flex justify-center">
         <KoFiSmallButton />
       </div>
@@ -29,17 +41,36 @@ export default function Home() {
         <h2 className="mb-4">Quick reads</h2>
         <ul className="grid gap-4 sm:grid-cols-2">
           {[
-            { slug: "stop-panic-attack", title: "How to stop a panic attack (3 steps that work)", blurb: "A quick plan with breathing + grounding you can use anywhere." },
-            { slug: "box-breathing", title: "Box breathing: calm your nervous system in 2 minutes", blurb: "Why 4-4-4-4 or 4-7-8 helps and when to use it." },
-            { slug: "grounding-54321", title: "5-4-3-2-1 grounding: a quick reset for anxiety", blurb: "Shift attention to your senses with a short, structured exercise." },
-            { slug: "sleep-anxiety", title: "Anxiety at night: how to switch off and sleep", blurb: "A simple wind-down routine and what to do when your mind won’t stop." },
+            {
+              slug: "stop-panic-attack",
+              title: "How to stop a panic attack (3 steps that work)",
+              blurb: "A quick plan with breathing + grounding you can use anywhere.",
+            },
+            {
+              slug: "box-breathing",
+              title: "Box breathing: calm your nervous system in 2 minutes",
+              blurb: "Why 4-4-4-4 or 4-7-8 helps and when to use it.",
+            },
+            {
+              slug: "grounding-54321",
+              title: "5-4-3-2-1 grounding: a quick reset for anxiety",
+              blurb: "Shift attention to your senses with a short, structured exercise.",
+            },
+            {
+              slug: "sleep-anxiety",
+              title: "Anxiety at night: how to switch off and sleep",
+              blurb: "A simple wind-down routine and what to do when your mind won’t stop.",
+            },
           ].map((i) => (
             <li
               key={i.slug}
               className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/40 smooth hover:translate-y-[-2px]"
             >
               <h3 className="mb-1">
-                <Link className="underline decoration-sky-400 underline-offset-4" href={`/library/${i.slug}`}>
+                <Link
+                  className="underline decoration-sky-400 underline-offset-4"
+                  href={`/library/${i.slug}`}
+                >
                   {i.title}
                 </Link>
               </h3>
@@ -53,15 +84,16 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
-            <p className="muted mb-4">
-              Calm Panic Now is free and open to everyone. If it helps you, please
-              consider supporting us with a small donation on Ko-fi.
-            </p>
-            <KoFiIframe />
-          </div>
+
+      {/* Support section with clean Ko-fi embed (no extra page background) */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
+        <p className="muted mb-4">
+          Calm Panic Now is free and open to everyone. If it helps you, please consider
+          supporting us with a small donation on Ko-fi.
+        </p>
+        <KoFiIframe />
+      </div>
 
       {/* SEO section */}
       <section className="pb-20 prose prose-slate dark:prose-invert max-w-none">
@@ -74,9 +106,10 @@ export default function Home() {
           Both are quick, evidence-informed, and work offline.
         </p>
         <p>
-          Box breathing guides a steady rhythm—<em>Inhale → Hold → Exhale → Hold</em>—which can reduce physiological arousal.
-          Grounding redirects attention to the present using sight, touch, sound, smell, and taste.
-          Together they’re practical ways to <strong>calm panic fast</strong> at home, at work, or on the go.
+          Box breathing guides a steady rhythm—<em>Inhale → Hold → Exhale → Hold</em>—which can
+          reduce physiological arousal. Grounding redirects attention to the present using sight,
+          touch, sound, smell, and taste. Together they’re practical ways to
+          <strong> calm panic fast</strong> at home, at work, or on the go.
         </p>
         <h3>When to use these techniques</h3>
         <ul>
@@ -88,7 +121,8 @@ export default function Home() {
           Want a step-by-step plan? Read <a href="/library/stop-panic-attack">How to stop a panic attack</a> or
           learn <a href="/library/box-breathing">how box breathing works</a> and
           <a href="/library/grounding-54321">how to do 5-4-3-2-1 grounding</a>.
-          This site is educational and not medical advice—if symptoms persist or worsen, consider speaking with a licensed clinician.
+          This site is educational and not medical advice—if symptoms persist or worsen, consider
+          speaking with a licensed clinician.
         </p>
       </section>
     </div>
