@@ -1,4 +1,3 @@
-// FILE: src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -21,6 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
+        <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 px-3 py-2 rounded">
+          Skip to content
+        </a>
         <header className="sticky top-0 z-50 bg-white/70 dark:bg-slate-950/70 backdrop-blur border-b border-slate-200 dark:border-slate-800">
           <nav className="container py-3 flex items-center gap-4">
             <Link href="/" className="font-semibold">
@@ -34,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
 
-        <main className="flex-1 pb-16 sm:pb-0">{children}</main>
+        <main id="content" className="flex-1 pb-16 sm:pb-0">{children}</main>
 
         <footer className="border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
           <div className="container py-6 space-y-2">
