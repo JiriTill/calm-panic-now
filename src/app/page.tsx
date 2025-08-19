@@ -32,8 +32,13 @@ export default function Home() {
       <HomeToolTabs />
 
       {/* Small Ko-fi button just under the tool card */}
-      <div className="mt-4 flex justify-center">
-        <KoFiSmallButton />
+      <div className="mt-2 text-center">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
+          Keep this app free for everyone by supporting it.
+        </p>
+        <div className="flex justify-center">
+          <KoFiSmallButton />
+        </div>
       </div>
 
       {/* Quick reads (same look as Library) */}
@@ -85,16 +90,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Support section with clean Ko-fi embed (no extra page background) */}
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-3">Support this project 💙</h2>
-        <p className="muted mb-4">
-          Calm Panic Now is free and open to everyone. If it helps you, please consider
-          supporting us with a small donation on Ko-fi.
-        </p>
-        <KoFiIframe />
-      </div>
-
       {/* SEO section */}
       <section className="pb-20 prose prose-slate dark:prose-invert max-w-none">
         <h2>How to calm panic and anxiety fast</h2>
@@ -125,6 +120,15 @@ export default function Home() {
           speaking with a licensed clinician.
         </p>
       </section>
+      
+      <div className="mt-2 text-center">
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
+          Keep this app free for everyone by supporting it.
+        </p>
+        <div className="flex justify-center">
+          <KoFiSmallButton />
+        </div>
+      </div>
     </div>
   );
 }
