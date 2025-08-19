@@ -5,6 +5,7 @@ import MobileNav from "./ui/MobileNav";
 import KoFiSmallButton from "./ui/KoFiSmallButton";
 import Image from "next/image";
 import MobileMenu from "./ui/MobileMenu"; 
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://calmpanicnow.com"),
@@ -105,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
       </footer>
+        <Analytics /> 
       </body>
     </html>
   );
