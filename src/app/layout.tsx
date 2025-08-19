@@ -44,68 +44,64 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main id="content" className="flex-1 pb-16 sm:pb-0">{children}</main>
 
-        <footer className="border-t border-slate-200 dark:border-slate-800">
-          <div className="container py-10">
-            <div className="grid gap-10 md:grid-cols-12">
-              {/* LEFT: brand + disclaimer */}
-              <div className="md:col-span-5 space-y-3">
-                <Link href="/" className="flex items-center gap-3">
-                  {/* CHANGE src below if your logo file is not /public/logo.svg */}
-                  <Image
-                    src="/logo.png"
-                    alt="Calm Panic Now"
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-xl ring-1 ring-slate-200 dark:ring-slate-800 bg-white dark:bg-slate-900"
-                  />
-                  <span className="text-base font-semibold">Calm Panic Now</span>
-                </Link>
-        
-                <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Educational only. Not medical advice. If you are in danger, call your local emergency number.
+      <footer className="border-t border-slate-200 dark:border-slate-800">
+        <div className="container py-10">
+          <div className="grid gap-12 md:grid-cols-12 items-start">
+            {/* LEFT: logo + name */}
+            <div className="md:col-span-5 space-y-4">
+              <Link href="/" className="flex items-center gap-3">
+                {/* use your PNG logo */}
+                <Image
+                  src="/logo.png"
+                  alt="Calm Panic Now logo"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-xl ring-1 ring-slate-200 dark:ring-slate-800 bg-white dark:bg-slate-900"
+                />
+                <span className="text-base font-semibold">Calm Panic Now</span>
+              </Link>
+            </div>
+      
+            {/* CENTER: Ko-fi card only */}
+            <div className="md:col-span-3">
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 p-5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mb-2">
+                  Keep this app free for everyone by supporting it:
                 </p>
-              </div>
-        
-              {/* CENTER: Ko-fi block */}
-              <div className="md:col-span-3">
-                <h4 className="eyebrow mb-2">Support</h4>
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 p-4">
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mb-2">
-                    Keep this app free for everyone by supporting it:
-                  </p>
-                  <div className="flex justify-center">
-                    <KoFiSmallButton />
-                  </div>
+                <div className="flex justify-center">
+                  <KoFiSmallButton />
                 </div>
               </div>
-        
-              {/* RIGHT: links in two columns */}
-              <div className="md:col-span-4 grid grid-cols-2 gap-6">
-                <nav className="text-sm">
-                  <h4 className="eyebrow mb-2">Tools</h4>
-                  <ul className="space-y-1">
-                    <li><Link href="/calm/box-breathing">Box Breathing</Link></li>
-                    <li><Link href="/calm/grounding-54321">Grounding 5-4-3-2-1</Link></li>
-                  </ul>
-                </nav>
-                <nav className="text-sm">
-                  <h4 className="eyebrow mb-2">Learn</h4>
-                  <ul className="space-y-1">
-                    <li><Link href="/library">Library</Link></li>
-                    <li><Link href="/about">About</Link></li>
-                    <li><Link href="/">Home</Link></li>
-                  </ul>
-                </nav>
-              </div>
             </div>
-        
-            {/* Bottom bar */}
-            <div className="mt-8 border-t border-slate-200 dark:border-slate-800 pt-6 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
-              <span>© {new Date().getFullYear()} Calm Panic Now</span>
-              <span />
+      
+            {/* RIGHT: links in two columns */}
+            <div className="md:col-span-4 grid grid-cols-2 gap-6">
+              <nav className="text-sm">
+                <h4 className="eyebrow mb-2">Tools</h4>
+                <ul className="space-y-1">
+                  <li><Link href="/calm/box-breathing">Box Breathing</Link></li>
+                  <li><Link href="/calm/grounding-54321">Grounding 5-4-3-2-1</Link></li>
+                </ul>
+              </nav>
+              <nav className="text-sm">
+                <h4 className="eyebrow mb-2">Learn</h4>
+                <ul className="space-y-1">
+                  <li><Link href="/library">Library</Link></li>
+                  <li><Link href="/about">About</Link></li>
+                  <li><Link href="/">Home</Link></li>
+                </ul>
+              </nav>
             </div>
           </div>
-        </footer>
+      
+          {/* Bottom center: disclaimer + copyright */}
+          <div className="mt-10 border-t border-slate-200 dark:border-slate-800 pt-6 text-center text-xs text-slate-600 dark:text-slate-400 space-y-2">
+            <p>Educational only. Not medical advice. If you are in danger, call your local emergency number.</p>
+            <p>© {new Date().getFullYear()} Calm Panic Now</p>
+          </div>
+        </div>
+      </footer>
+
 
         <MobileNav />
       </body>
