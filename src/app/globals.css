@@ -6,7 +6,10 @@
 :root {
   color-scheme: light dark;
 }
-html, body { height: 100%; }
+html, body { 
+  height: 100%; 
+  overscroll-behavior-y: contain;
+}
 
 body {
   @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100;
