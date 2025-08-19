@@ -4,6 +4,7 @@ import Link from "next/link";
 import MobileNav from "./ui/MobileNav";
 import KoFiSmallButton from "./ui/KoFiSmallButton";
 import Image from "next/image";
+import MobileMenu from "./ui/MobileMenu"; 
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://calmpanicnow.com"),
@@ -34,15 +35,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Image src="/logo.png" alt="Calm Panic Now logo" width={28} height={28} />
               <span>Calm Panic Now</span>
             </Link>
+          
+            {/* desktop links */}
             <div className="ml-auto hidden sm:flex gap-4 text-sm">
               <Link href="/calm/box-breathing">Box Breathing</Link>
               <Link href="/calm/grounding-54321">Grounding</Link>
               <Link href="/library">Library</Link>
             </div>
+            <MobileMenu />
           </nav>
         </header>
 
-        <main id="content" className="flex-1 pb-16 sm:pb-0">{children}</main>
+        <main id="content" className="flex-1">{children}</main>
 
       <footer className="border-t border-slate-200 dark:border-slate-800">
         <div className="container max-w-5xl py-10">
@@ -101,9 +105,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
       </footer>
-
-
-        <MobileNav />
       </body>
     </html>
   );
