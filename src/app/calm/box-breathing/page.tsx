@@ -145,9 +145,14 @@ export default function BoxBreathingPage() {
       </section>
 
       {/* Ko-fi support (small button) */}
-      <div className="mt-2 flex justify-center">
-        <KoFiSmallButton />
-      </div>
+        <div className="mt-2 text-center">
+          <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
+            Keep this app free for everyone by supporting it.
+          </p>
+          <div className="flex justify-center">
+            <KoFiSmallButton />
+          </div>
+        </div>
 
       {/* Helpful links to Library */}
       <section className="pt-6">
@@ -185,6 +190,49 @@ export default function BoxBreathingPage() {
           ))}
         </ul>
       </section>
+      
+      {/* SEO / educational section */}
+      <section className="pt-10 pb-16 prose prose-slate dark:prose-invert max-w-none">
+        <h2>Box breathing: how it works and when to use it</h2>
+        <p>
+          <strong>Box breathing</strong> (also called <em>square breathing</em>) is a simple
+          <strong> 4-4-4-4 breathing</strong> pattern: inhale for four counts, hold for four,
+          exhale for four, and hold for four. This steady rhythm can reduce physiological
+          arousal and help many people <strong>calm anxiety fast</strong>—especially during
+          early signs of a <strong>panic attack</strong> or stressful moments at work, school,
+          or before sleep.
+        </p>
+      
+        <h3>Step-by-step: how to do box breathing</h3>
+        <ol>
+          <li>Sit comfortably and relax your shoulders.</li>
+          <li>Inhale through the nose for <strong>4</strong> counts.</li>
+          <li>Hold your breath for <strong>4</strong> counts.</li>
+          <li>Exhale gently for <strong>4</strong> counts.</li>
+          <li>Hold again for <strong>4</strong> counts, then repeat for 2–4 minutes.</li>
+        </ol>
+      
+        <h3>Benefits people report</h3>
+        <ul>
+          <li>Quick, structured way to slow breathing and heart rate</li>
+          <li>Easy to remember—just four equal phases</li>
+          <li>Pairs well with grounding (try the <a href="/calm/grounding-54321">5-4-3-2-1 exercise</a>)</li>
+        </ul>
+      
+        <h3>Tips &amp; safety</h3>
+        <ul>
+          <li>If four counts feels long, try 3-3-3-3. Comfort comes first.</li>
+          <li>Breathe quietly—no need to force deep breaths.</li>
+          <li>Stop if you feel dizzy or uncomfortable. This is educational and not medical advice.</li>
+        </ul>
+      
+        <p>
+          Want a full plan? Read <a href="/library/stop-panic-attack">How to stop a panic attack</a> or learn more in
+          our <a href="/library/box-breathing">box breathing guide</a>. For a quick sensory reset, try
+          <a href="/library/grounding-54321"> 5-4-3-2-1 grounding</a>.
+        </p>
+      </section>
+
     </div>
   );
 }
