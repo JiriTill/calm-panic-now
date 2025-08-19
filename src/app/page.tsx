@@ -121,14 +121,6 @@ export default function Home() {
         </p>
       </section>
       
-      <div className="mt-2 text-center">
-        <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
-          Keep this app free for everyone by supporting it.
-        </p>
-        <div className="flex justify-center">
-          <KoFiSmallButton />
-        </div>
-      </div>
     </div>
   );
 }
