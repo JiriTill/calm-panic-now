@@ -45,10 +45,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="content" className="flex-1 pb-16 sm:pb-0">{children}</main>
 
       <footer className="border-t border-slate-200 dark:border-slate-800">
-        <div className="container py-10">
+        <div className="container max-w-5xl py-10">
           <div className="grid gap-12 md:grid-cols-12 items-start">
             {/* LEFT: logo + name */}
-            <div className="md:col-span-5 space-y-4">
+            <div className="md:col-span-4 space-y-4">
               <Link href="/" className="flex items-center gap-3">
                 {/* use your PNG logo */}
                 <Image
@@ -63,8 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
       
             {/* CENTER: Ko-fi card only */}
-            <div className="md:col-span-3">
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 p-5">
+            <div className="md:col-span-5">
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 p-6">
                 <p className="text-xs text-slate-600 dark:text-slate-400 mb-2">
                   Keep this app free for everyone by supporting it:
                 </p>
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
       
             {/* RIGHT: links in two columns */}
-            <div className="md:col-span-4 grid grid-cols-2 gap-6">
+            <div className="md:col-span-3 grid grid-cols-2 gap-6">
               <nav className="text-sm">
                 <h4 className="eyebrow mb-2">Tools</h4>
                 <ul className="space-y-1">
